@@ -57,9 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DirectoryInfo\CreateDirectoryExtension.cs" />
+    <Compile Include="GeneticAlgorithm\CrossoverEnum.cs" />
     <Compile Include="GeneticAlgorithm\GA.cs" />
     <Compile Include="GeneticAlgorithm\GeneticAlgorithmScope.cs" />
     <Compile Include="GeneticAlgorithm\EvolveNextGeneration.cs" />
+    <Compile Include="GeneticAlgorithm\MutationEnum.cs" />
+    <Compile Include="GeneticAlgorithm\SelectionEnum.cs" />
     <Compile Include="IEnumerable\ForEachExtension.cs" />
     <Compile Include="IEnumerable\RandomizeExtension.cs" />
     <Compile Include="Int\IsPrimeExtension.cs" />
@@ -90,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dna.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GeneticAlgorithm\dna.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

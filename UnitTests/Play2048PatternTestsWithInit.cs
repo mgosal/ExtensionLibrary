@@ -26,7 +26,7 @@ namespace UnitTests
         [TestMethod]
         public void Play2048PatternTest()
         {
-            GA.GetSingleton().Init(4,new List<string>() { "up", "down", "left", "right" },3,4);
+            GA.GetSingleton().Init(4,new List<string>() { "up", "down", "left", "right" },3,4,Selection.EliteSelection, Crossover.CutAndSpliceCrossover, Mutation.UniformMutation);
             var p0 = GA.GetSingleton().GetPatternsKeys();
             Console.WriteLine("GA running...");
             GA.GetSingleton().EvolveNextGeneration();

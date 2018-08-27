@@ -34,23 +34,18 @@ namespace ExtensionLibrary.GeneticAlgorithm
             return _singleton;
         }
 
-        public enum Selections
-        {
-            EliteSelection,
-            RouletteWheelSelection,
-            StochasticUniversalSamplingSelection,
-            TournamentSelection
-        }
         public object GetInstance(string strFullyQualifiedName)
         {
             Type t = Type.GetType(strFullyQualifiedName);
             return Activator.CreateInstance(t);
         }
-        public void Init(int patternLength, List<string> choices, int populationSize, int maxGenerations)
+        public void Init(int patternLength, List<string> choices, int populationSize, int maxGenerations,
+            Selection selection, Crossover crossover, Mutation mutation)
         {
-            _selection = new EliteSelection();
-            _crossover = new TwoPointCrossover();
-            _mutation = new PartialShuffleMutation();
+            string selectionname = Enum.GetName(typeof(Selection), selection);
+            _selection = (ISelection)Activator.CreateInstance("GeneticSharp.Domain", "GeneticSharp.Domain.Selections." + selectionname).Unwrap(); //new EliteSelection();
+            _crossover = (ICrossover)Activator.CreateInstance("GeneticSharp.Domain", "GeneticSharp.Domain.Crossovers." + crossover).Unwrap(); //new TwoPointCrossover();
+            _mutation = (IMutation)Activator.CreateInstance("GeneticSharp.Domain", "GeneticSharp.Domain.Mutations." + mutation).Unwrap(); //new PartialShuffleMutation();
             
             _fittness = new ClosestToMillion();
 
@@ -143,7 +138,6 @@ namespace ExtensionLibrary.GeneticAlgorithm
     {
         public double Evaluate(IChromosome chromosome)
         {
-
             var timeoutTime = DateTime.Now.AddMinutes(10);
             // Evaluate the fitness of chromosome.
             var c = chromosome as PlayPatternChromosome;

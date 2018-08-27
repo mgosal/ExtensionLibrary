@@ -12,7 +12,7 @@ namespace ExtensionLibrary.GeneticAlgorithm
 {
     public class GeneticAlgorithmScope: NativeActivity
     {
-
+        
 
         [Browsable(false)]
         public ActivityAction<string> Body { get; set; }
@@ -39,15 +39,20 @@ namespace ExtensionLibrary.GeneticAlgorithm
         [Category("GA")]
         public OutArgument<List<string>> Result { get; set; }
 
+        [Category("GA")]
+        public InArgument<Selection> Selection { get; set; }
 
         [Category("GA")]
-        public InArgument<GA.Selections> Selection { get; set; } 
+        public InArgument<Crossover> Crossover { get; set; }
+
+
+        [Category("GA")]
+        public InArgument<Mutation> Mutation { get; set; }
 
         public GeneticAlgorithmScope()
         {
             Body = new ActivityAction<string>
             {
-                Argument = new DelegateInArgument<string>("GA"),
                 Handler = new Sequence { DisplayName = "Do" }
             };
         }
@@ -73,7 +78,8 @@ namespace ExtensionLibrary.GeneticAlgorithm
 
         protected override void Execute(NativeActivityContext context)
         {
-            GA.GetSingleton().Init(PatternLength.Get(context), Choices.Get(context), Population.Get(context), MaxGenerations.Get(context));
+            GA.GetSingleton().Init(PatternLength.Get(context), Choices.Get(context), Population.Get(context), MaxGenerations.Get(context),
+                Selection.Get(context),Crossover.Get(context),Mutation.Get(context));
             var r = GA.GetSingleton().GetPatternsKeys();
             Result.Set(context,r);
             if (Body != null)

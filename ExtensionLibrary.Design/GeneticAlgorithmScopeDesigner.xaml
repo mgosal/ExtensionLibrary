@@ -1,0 +1,10 @@
+﻿<sap:ActivityDesigner
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation" xmlns:GeneticAlgorithm="clr-namespace:ExtensionLibrary.GeneticAlgorithm;assembly=ExtensionLibrary" x:Class="ExtensionLibrary.Design.GeneticAlgorithmScopeDesigner"
+    Height="195" Width="431">
+    <sap:ActivityDesigner.DataContext>
+        <GeneticAlgorithm:GeneticAlgorithmScope/>
+    </sap:ActivityDesigner.DataContext>
+</sap:ActivityDesigner>
